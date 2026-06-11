@@ -319,6 +319,13 @@ barmy-sentinel-END
 baz> ")
     (should (equal (ess--command-delimited-output-info (current-buffer) "my-sentinel")
                    (list 20 26 nil))))
+  ;; Delimiter embedded in output should still error
+  (with-temp-buffer
+    (insert "
+my-sentinel-START
+barmy-sentinel-ENDoops
+baz> ")
+    (should-error (ess--command-delimited-output-info (current-buffer) "my-sentinel")))
   ;; Command output and new output
   (with-temp-buffer
     (insert "
