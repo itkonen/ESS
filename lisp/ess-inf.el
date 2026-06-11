@@ -420,9 +420,9 @@ output, if any."
         (when (re-search-forward (ess--delimiter-start-re delim) nil t)
           (let ((start (1+ (match-end 0))))
             (when (re-search-forward (ess--delimiter-end-re delim) nil t)
-              (let ((end-delim-at-bol (equal (line-beginning-position)
-                                             (match-beginning 0))))
-                (unless (or end-delim-at-bol
+              (let ((end-delim-at-line-start (equal (line-beginning-position)
+                                                    (match-beginning 0))))
+                (unless (or end-delim-at-line-start
                             (save-excursion
                               (goto-char (match-end 0))
                               (looking-at-p "\r?\n")))
