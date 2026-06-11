@@ -422,10 +422,10 @@ output, if any."
             (when (re-search-forward (ess--delimiter-end-re delim) nil t)
               (let ((end-delim-at-bol (equal (line-beginning-position)
                                              (match-beginning 0))))
-                (when (not (or end-delim-at-bol
-                               (save-excursion
-                                 (goto-char (match-end 0))
-                                 (looking-at-p "\r?\n"))))
+                (unless (or end-delim-at-bol
+                            (save-excursion
+                              (goto-char (match-end 0))
+                              (looking-at-p "\r?\n")))
                   (error "Missing newline in command output")))
               (let ((end (max (1- (match-beginning 0))
                               start)))
